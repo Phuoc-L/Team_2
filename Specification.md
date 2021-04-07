@@ -3,10 +3,11 @@
 ## -Ronnette Herico (@ronnetteherico)
 ## -Tommy Luu (@TOMMYLULU85)
 ## -Phuoc Le (@Phuoc-L)
+## -Phone Lat Yar (@phonelatyar)
 
-** Product name: TaskMate **
-** Product statemement: This product is a task management software that allows users to keep track of tasks and collaborate with other users on collective tasks. **
-** Date: 7/3/2021 **
+** Product name:** TaskMate
+** Product statemement:** This product is a task management software that allows users to keep track of tasks and collaborate with other users on collective tasks.
+** Date:** 7/3/2021
 
 # Use cases:
 * Add Task
@@ -243,6 +244,87 @@ The user clicks on yes to log out of their account.
 * The user clicks “cancel”
 	* The user is not logged out of their account
 
+# Task: Create Group
+## Summary
+A user can create and add other users to their group. Different groups cannot view another group’s tasks.
+## Actors
+The user
+Other users
+## Preconditions
+* The user is logged into their account.
+* The name of this group should not match other group names
+* The other user has an account.
+## Triggers
+The user clicks on the create group button.
+## Primary Sequence
+	1.The system will prompt the user with a “enter the name of this group”.
+	2.The user enter a name for this group
+	3.The user clicks confirm
+	4.The system will prompt the user with a list of users who are not in a group.
+	5.The user will then choose one or more users to be assigned to a group.
+	6.The user clicks confirm
+## Primary Postconditions
+* A group is created and the selected group members are assigned to the group
+## Alternate Sequences
+* The system will prompt the user with a “enter the name of this group”.
+	* The user clicks “cancel”
+		* No group is created
+* The system will prompt the user with a list of users who are not in a group.
+	* The user clicks “cancel”
+		* No group is created
+
+# Task: Create Team
+## Summary
+A user can create and assign themself or other users to their team.
+## Actors
+	1.The user
+	2.Other users
+## Preconditions
+	The user is logged into their account.
+* The other user has to be part of the same group.
+* The name of this team should not match other team names
+## Triggers
+The user clicks on the create team button.
+## Primary Sequence
+	1.The system will prompt the user with a “enter the name of this team”.
+	2.The user enter a name for this team
+	3.The user clicks confirm
+	4.The system will prompt the user with a list of group members who are not on a team.
+	5.The user will then choose one or more users to be assigned to a team.
+	6.The user clicks confirm
+## Primary Postconditions
+* The team is created and the selected group members are assigned to the team
+## Alternate Sequences
+* The system will prompt the user with a “enter the name of this team”.
+	* The user clicks “cancel”
+		* No team is created
+* The system will prompt the user with a list of group members who are not on a team.
+	* The user clicks “cancel”
+		* No team is created
+
+# Task: Assign Tasks
+## Summary
+One user can assign an already existing task to another user
+## Actors
+	1.The user
+	2.Other user
+## Preconditions
+* The user is logged into their account.
+* The other user has to be a part of the same team.
+* The task must already exist in order to assign it to another user.
+## Triggers
+* The user clicks a task and select “assign task”
+## Primary Sequence
+	1.The system will prompt the user with a list of their team members.
+	2.The user will then choose one of the team members to assign the task to.
+	3.The user clicks confirm.
+## Primary Postconditions
+* The task is assigned to the selected team member.
+## Alternate Sequences
+* The user clicks cancel
+	* The task is not assigned to anyone.
+
+
 ## Non-Functional Requirements
 * The user can switch between light and dark mode
 * The system responds to the user within 1 second.
@@ -252,4 +334,6 @@ The user clicks on yes to log out of their account.
 * User: The person navigating the system through their computer. 
 * System: The website
 * Another user: Any person that is not the current user and is also in the same team
+
+![Diagram](https://drive.google.com/uc?export=view&id=1DTrUHIgYjbrrRcfo7iy68ULpFPdPv2wK)
 

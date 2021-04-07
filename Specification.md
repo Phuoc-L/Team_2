@@ -8,7 +8,6 @@
 ** Product statemement: This product is a task management software that allows users to keep track of tasks and collaborate with other users on collective tasks. **
 ** Date: 7/3/2021 **
 
-
 # Use cases:
 * Add Task
 * Delete Task
@@ -103,4 +102,72 @@ The user
 ## Alternate Sequences
 * The user clicks “cancel”
     * No change is made to the selected task's description
+
+# Task: Check Task 
+## Summary
+A user who checks off the number of selected tasks they have completed. 
+## Actors
+The user
+## Preconditions
+* precond1: User is already logged in.
+* precond 2: User has already distinguished the number of tasks. 
+## Triggers
+The user selects a checkbox and a black check mark would appear when the task they sought out is completed. 
+## Primary Sequence
+Hover over the white check box
+Click on the box to indicate that the task is completed. 
+## Primary Postconditions
+* postcondition: The black check mark in the box would be an indicator that the user has completed the desired tasks and has marked it off. 
+
+# Task: Uncheck Tasks 
+## Summary
+A user who unchecks the number of selected tasks since they haven’t completed them.
+## Actors
+The user
+## Preconditions
+User is already logged in.
+User has already distinguished the number of tasks. 
+User has checked off the tasks they have done. 
+## Triggers
+The user clicks on the black check mark to uncheck it. 
+## Primary Sequence
+Hover over the black check mark.
+Click on it .
+## Primary Postconditions
+* postcondition: The number of desired tasks that don’t have a black check mark in the box would be shown as the number of tasks that haven't been completed.
+
+# Task: View Completed Tasks
+## Summary
+A user who has logged in can view all completed tasks
+## Actors
+The user
+## Preconditions
+* The user is logged in
+## Triggers
+The user have to click the view completed task button
+## Primary Sequence
+The system will prompt the user with”are you sure you want to view only completed tasks?
+The user clicks confirm”
+## Primary Postconditions
+* The system will only show completed tasks
+
+# Task: View Uncompleted Tasks
+## Summary
+A user who has logged in can view all uncompleted tasks
+## Actors
+The user
+## Preconditions
+* The user is logged in
+## Triggers
+The user have to click the view uncompleted task button
+## Primary Sequence
+The system will prompt the user with”are you sure you want to view only uncompleted tasks?
+The user clicks “confirm”.
+## Primary Postconditions
+* The system will only show uncompleted tasks
+
+## Non-Functional Requirements
+* The user can switch between light and dark mode
+* The system responds to the user within 1 second. 
+* The menu is clear to see and navigate.
 

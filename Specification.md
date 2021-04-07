@@ -166,11 +166,6 @@ The user clicks “confirm”.
 ## Primary Postconditions
 * The system will only show uncompleted tasks
 
-## Non-Functional Requirements
-* The user can switch between light and dark mode
-* The system responds to the user within 1 second. 
-* The menu is clear to see and navigate.
-
 # Task: View Description
 ## Summary
 A user who wants to see the description of the task they have done and are about to do. 
@@ -247,7 +242,12 @@ The user clicks on yes to log out of their account.
 ## Alternate Sequences
 * The user clicks “cancel”
 	* The user is not logged out of their account
- 
+
+## Non-Functional Requirements
+* The user can switch between light and dark mode
+* The system responds to the user within 1 second.
+* The menu is clear to see and navigate.
+
 ## Glossary
 * User: The person navigating the system through their computer. 
 * System: The website

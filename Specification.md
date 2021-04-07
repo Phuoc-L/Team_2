@@ -171,3 +171,85 @@ The user clicks “confirm”.
 * The system responds to the user within 1 second. 
 * The menu is clear to see and navigate.
 
+# Task: View Description
+## Summary
+A user who wants to see the description of the task they have done and are about to do. 
+## Actors
+The user
+## Preconditions
+User is already logged in.
+User has determined the number of tasks they have done and what they are.
+User has already written what they need to do for their tasks.
+## Triggers
+The user clicks on the task name and the description will be in a separate window.
+## Primary Sequence
+* Hover over name of the task
+* Click on it .
+* Another window would appear to show the description of what the task is about. 
+## Primary Postconditions
+* postcondition: The user can see the description of what they need to do. 
+
+# Task: Change task deadline
+## Summary
+A user who is logged in can change the task deadline
+## Actors
+The user
+## Triggers
+The user selects the “Change task deadline” option
+## Primary Sequence
+The user selects the “Change task deadline” option
+The system prompts the user to select a deadline
+The user selects “Confirm”
+The system displays the message “Deadline has been changed”
+## Primary postcondition
+* The task deadline is changed
+## Alternate Sequence
+* The user selects the “Cancel” option
+	* The deadline of the task remains unchanged
+
+# Task: Log In
+## Summary
+A user who logs in to their account with a username and password. 
+## Actors
+The user
+## Preconditions
+* User knows their account username and password. 
+## Triggers
+When the user goes to the website then the user can log in. 
+## Primary Sequence
+The user types in their username in the textbox that says username.
+The user types in their password in the textbox that says password.
+The user clicks on the Login button once they have filled in the username and password box. 
+## Primary Postconditions
+* postcondition: The user is in their account where they can view and change the tasks they have done. 
+## Alternate Sequences
+  * If a user doesn’t remember their password or username, then they click on a phrase that says Forget password/username.
+* Another window opens and the user puts in their information to reset their password or username.
+### Alternate Trigger
+A highlighted text named Forget Password/Username? would be the trigger for resetting the username and password.
+### Alternate Postconditions
+* Users can change their username or password to their account if they don’t remember them.
+
+# Task: Log Out
+## Summary
+A user who has logged in can log out of the account they are currently in
+## Actors
+The user
+## Preconditions
+* The user is logged in.
+## Triggers
+The user clicks on the log out button. 
+## Primary Sequence
+The system will prompt the user with “are you sure you want to log out?”
+The user clicks on yes to log out of their account. 
+## Primary Postconditions
+* The user is logged out of their account.
+## Alternate Sequences
+* The user clicks “cancel”
+	* The user is not logged out of their account
+ 
+## Glossary
+* User: The person navigating the system through their computer. 
+* System: The website
+* Another user: Any person that is not the current user and is also in the same team
+

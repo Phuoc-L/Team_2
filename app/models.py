@@ -6,6 +6,7 @@ from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+# default user: username = 'user', email = 'user@gmail.com', password = hash of 'password'
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String, nullable = False, unique = False)

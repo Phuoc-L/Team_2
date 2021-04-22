@@ -1,10 +1,10 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request, url_for
 from flask_login import current_user, login_user
 from flask_login import logout_user
 from flask_login import login_required
 
 from app import myapp
-from app.forms import LoginForm
+from app.forms import LoginForm, TaskForm
 
 from app.models import User
 
@@ -38,7 +38,7 @@ def login():
         # page in this case.
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-          	next_page = url_for('index')
+          	next_page = url_for('task')
 
         return redirect(next_page)
 
@@ -54,3 +54,14 @@ def req():
     User needs to be logged in
     </body>
     </html>'''
+
+@myapp.route("/task", methods = ['GET', 'POST'])
+def task():
+    form = TaskForm()
+    return render_template('task.html', title='Task', form=form)
+
+@myapp.route('/Logout')
+def Logout():
+	logout_user()
+	flash('You are logged out')
+	return redirect('/login')

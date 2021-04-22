@@ -8,3 +8,14 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
+class TaskForm(FlaskForm):
+    task_name = StringField('Name of Task', validators = [DataRequired()])
+	#task_description = StringField('Task Description', validators = [DataRequired()])
+	#deadline = 
+	#group =
+	#team = 
+
+class LogoutForm(FlaskForm):
+    Logout  = SubmitField('Logout')
+
+

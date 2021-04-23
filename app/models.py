@@ -6,14 +6,14 @@ from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-# default user: username = 'user', email = 'user@gmail.com', password = hash of 'password'
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String, nullable = False, unique = False)
-    email = db.Column(db.String(32), unique = True, nullable = False, index = True)
+    # email = db.Column(db.String(32), unique = True, nullable = False, index = True)
     password = db.Column(db.String(200), unique = False)
 
-    posts = db.relationship('Post', backref = 'author', lazy = 'dynamic')
+    # Task = db.relationship('Task', backref = 'author', lazy = 'dynamic')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -24,15 +24,19 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)    
         
-class Post(db.Model):
+class Task(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    body = db.Column(db.String(256))
-    timestamp = db.Column(db.DateTime, index = True, default = datetime.utcnow)
+    task_name = db.Column(db.String(256))
+    task_description = db.Column(db.String(256))
+    deadline = db.Column(db.DateTime, index = True, unique = False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def set_deadline(self, deadline):
+        self.deadline = datetime.strptime(deadline, '%m/%d/%Y')
 
     def __repr__(self):
-        return '<Posts {}>'.format(self.body)
+        return '<Task {}>'.format(self.task_description)
 
 @login.user_loader
 def load_user(id):

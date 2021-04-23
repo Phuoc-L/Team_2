@@ -3,10 +3,13 @@ from flask_login import current_user, login_user
 from flask_login import logout_user
 from flask_login import login_required
 
-from app import myapp
-from app.forms import LoginForm, TaskForm
+from datetime import datetime
 
-from app.models import User
+from app import db
+from app import myapp
+from app.forms import LoginForm, TaskForm, SignUpForm
+
+from app.models import User, Task
 
 # different URL the app will implement
 @myapp.route("/")
@@ -55,13 +58,50 @@ def req():
     </body>
     </html>'''
 
+
+# This page display all of the posted tasks
 @myapp.route("/task", methods = ['GET', 'POST'])
+@login_required
 def task():
     form = TaskForm()
-    return render_template('task.html', title='Task', form=form)
+    if form.validate_on_submit():
+	    # create the new task
+        new_task = Task(task_name = form.task_name.data, task_description = form.task_description.data)
+        new_task.set_deadline(form.deadline.data)
+        db.session.add(new_task)
+        db.session.commit()
+        flash('Task Created')
+	
+    #display all of the tasks in database
+    posts = []
+    alltask = Task.query.all()
+    if alltask is not None:
+        for atask in alltask:
+            posts = posts + [
+            {	'Name':f'{atask.task_name}', 
+                'Description':f'{atask.task_description}',
+		        'Deadline': f'{atask.deadline.strftime("%m/%d/%Y")}'}
+            ]
+			
+    return render_template('task.html', title='Task', form=form, posts=posts)
 
 @myapp.route('/Logout')
 def Logout():
 	logout_user()
 	flash('You are logged out')
 	return redirect('/login')
+
+@myapp.route('/CreateAccount', methods = ['GET', 'POST'])
+def Create_Account():
+    form = SignUpForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username = form.username.data).first()
+        # if not create user and add to database
+        if user is None:
+            new_user = User(username = form.username.data)
+            new_user.set_password(form.password.data)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Account Created')
+	
+    return render_template('create_account.html', title='Create Account', form=form)

@@ -58,33 +58,6 @@ def req():
     </body>
     </html>'''
 
-
-# This page display all of the posted tasks
-@myapp.route("/task", methods = ['GET', 'POST'])
-@login_required
-def task():
-    form = TaskForm()
-    if form.validate_on_submit():
-	    # create the new task
-        new_task = Task(task_name = form.task_name.data, task_description = form.task_description.data)
-        new_task.set_deadline(form.deadline.data)
-        db.session.add(new_task)
-        db.session.commit()
-        flash('Task Created')
-	
-    #display all of the tasks in database
-    posts = []
-    alltask = Task.query.all()
-    if alltask is not None:
-        for atask in alltask:
-            posts = posts + [
-            {	'Name':f'{atask.task_name}', 
-                'Description':f'{atask.task_description}',
-		        'Deadline': f'{atask.deadline.strftime("%m/%d/%Y")}'}
-            ]
-			
-    return render_template('task.html', title='Task', form=form, posts=posts)
-
 @myapp.route('/Logout')
 def Logout():
 	logout_user()
@@ -106,7 +79,25 @@ def Create_Account():
 	
     return render_template('create_account.html', title='Create Account', form=form)
 
-@myapp.route('/taskmenu')
+@myapp.route('/taskmenu', methods = ['GET', 'POST'])
 def taskmenu():
     #@login_required
-    return render_template('taskmenu.html')
+   form = TaskForm()
+   if form.validate_on_submit():
+	    # create the new task
+        new_task = Task(task_name = form.task_name.data, task_description = form.task_description.data)
+        new_task.set_deadline(form.deadline.data)
+        db.session.add(new_task)
+        db.session.commit()
+   #display all of the tasks in database
+   posts = []
+   alltask = Task.query.all()
+   if alltask is not None:
+       for atask in alltask:
+            posts = posts + [
+            {	'Name':f'{atask.task_name}', 
+                'Description':f'{atask.task_description}',
+		        'Deadline': f'{atask.deadline.strftime("%m/%d/%Y")}'}
+            ] 
+
+   return render_template('taskmenu.html', title='Task', form=form, posts=posts)

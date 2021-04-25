@@ -39,7 +39,7 @@
                 <th>Task Name</th>
                 <th>Description</th>
                 <th>Deadline</th>
-                <th>Status</th>
+                <th>Completed</th>
                 <th>Actions</th>
             </tr>
             {% for post in posts %}
@@ -54,12 +54,15 @@
                     {{ post.Deadline }}
                 </td>
                 <td>
-                    <!--if completed = false, display "Not completed"
-                    if completed = true, display "Completed"-->
+                    {% if post.completed == false %}
+                        Not Completed
+                    {% else %}
+                        Completed
+                    {% endif %}
                 </td>
                 <td>
                     <a href="/deletetask/{{ post.id }}">Delete Task</a>
-                    <a href="/checkofftask/{{ post.id }}">Check Off Task</a>
+                    <a href="/checktask/{{ post.id }}">Check Task</a>
                 </td>
             </tr>  
             {% endfor %}

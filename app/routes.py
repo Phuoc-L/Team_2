@@ -112,8 +112,13 @@ def deletetask(id):
     db.session.commit()
     return redirect('/taskmenu')
 
-@myapp.route('/checkofftask/<int:id>')
-def checkofftask(id):
+@myapp.route('/checktask/<int:id>')
+def checktask(id):
     task_to_check = Task.query.get_or_404(id)
-    task_to_check.completed = True
+    if task_to_check.completed == False:
+        task_to_check.completed = True
+        db.session.commit()
+    else:
+        task_to_check.completed = False
+        db.session.commit()
     return redirect('/taskmenu')

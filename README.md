@@ -18,11 +18,18 @@
 
 ## List of Features
 **Sign Up:** Users can create an account in order for them to login.
+
 **Login:** Users log in to their account with the username and password that they created.
+
 **Logout:** Users log out of their account and they are sent back to the main login page. 
+
 **Create Task:** Users can create a task with a task name, description and deadline.
+
 **Delete Task:** Users can delete the task they have created.
+
 **Check Task:** Users can check tasks as they complete them.
+
 **Uncheck Task:**Users can check off the tasks when they complete them. 
+
 **Change Taskname:** Users can change the task name of their task. 
 

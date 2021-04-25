@@ -17,7 +17,6 @@ class TaskForm(FlaskForm):
     task_name = StringField('Name of Task', validators = [DataRequired()])
     task_description = StringField('Task Description', validators = [DataRequired()])
     deadline = StringField('Deadline (mm/dd/yyyy)', validators = [DataRequired()])
-    
 	#group = 
 	#team = 
     submit = SubmitField('Create Task')

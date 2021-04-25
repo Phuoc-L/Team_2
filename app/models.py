@@ -12,8 +12,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String, nullable = False, unique = False)
     # email = db.Column(db.String(32), unique = True, nullable = False, index = True)
     password = db.Column(db.String(200), unique = False)
-
-    # Task = db.relationship('Task', backref = 'author', lazy = 'dynamic')
+    #tasks = db.relationship('Task', backref = 'author', lazy = 'dynamic')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -29,8 +28,8 @@ class Task(db.Model):
     task_name = db.Column(db.String(256))
     task_description = db.Column(db.String(256))
     deadline = db.Column(db.DateTime, index = True, unique = False)
-    Completed = db.Column(db.BooleanField)
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    completed = db.Column(db.Boolean, default = False)
+    #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def set_deadline(self, deadline):
         self.deadline = datetime.strptime(deadline, '%m/%d/%Y')

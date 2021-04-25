@@ -54,11 +54,12 @@
                     {{ post.Deadline }}
                 </td>
                 <td>
-                
+                    <!--if completed = false, display "Not completed"
+                    if completed = true, display "Completed"-->
                 </td>
                 <td>
                     <a href="/deletetask/{{ post.id }}">Delete Task</a>
-                    <a href=''>Check Off Task</a>
+                    <a href="/checkofftask/{{ post.id }}">Check Off Task</a>
                 </td>
             </tr>  
             {% endfor %}

@@ -89,7 +89,7 @@ def taskmenu():
         new_task.set_deadline(form.deadline.data)
         db.session.add(new_task)
         db.session.commit()
-   #display all of the tasks in database
+   
    posts = []
    alltask = Task.query.all()
    if alltask is not None:
@@ -97,14 +97,23 @@ def taskmenu():
             posts = posts + [
             {	'Name':f'{atask.task_name}', 
                 'Description':f'{atask.task_description}',
-		        'Deadline': f'{atask.deadline.strftime("%m/%d/%Y")}'}
+		        'Deadline':f'{atask.deadline.strftime("%m/%d/%Y")}',
+                'id':f'{atask.id}',
+                'completed':f'{atask.completed}'
+            }
             ] 
 
    return render_template('taskmenu.html', title='Task', form=form, posts=posts)
 
-@myapp.route('/deletetask/<int:id>', methods=['POST'])
-def delete(id):
-    delete_task = Task.query.get_or_404(id)
-    db.session.delete(delete_task)
+@myapp.route('/deletetask/<int:id>')
+def deletetask(id):
+    task_to_delete = Task.query.get_or_404(id)
+    db.session.delete(task_to_delete)
     db.session.commit()
-    return redirect('/taskmanager')
+    return redirect('/taskmenu')
+
+@myapp.route('/checkofftask/<int:id>')
+def checkofftask(id):
+    task_to_check = Task.query.get_or_404(id)
+    task_to_check.completed = True
+    return redirect('/taskmenu')

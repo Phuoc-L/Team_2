@@ -33,6 +33,7 @@
             </p>
             <p>{{ form.submit() }}</p>
         </form>
+
         <table class="center">
             <tr>
                 <th>Task Name</th>
@@ -53,11 +54,11 @@
                     {{ post.Deadline }}
                 </td>
                 <td>
-                    
+                
                 </td>
                 <td>
-                    <a href=''>Delete Task</a>
-                    <a href=''>Edit Task</a>
+                    <a href="/deletetask/{{ post.id }}">Delete Task</a>
+                    <a href=''>Check Off Task</a>
                 </td>
             </tr>  
             {% endfor %}

@@ -101,3 +101,10 @@ def taskmenu():
             ] 
 
    return render_template('taskmenu.html', title='Task', form=form, posts=posts)
+
+@myapp.route('/deletetask/<int:id>', methods=['POST'])
+def delete(id):
+    delete_task = Task.query.get_or_404(id)
+    db.session.delete(delete_task)
+    db.session.commit()
+    return redirect('/taskmanager')

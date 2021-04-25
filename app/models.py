@@ -29,7 +29,7 @@ class Task(db.Model):
     task_name = db.Column(db.String(256))
     task_description = db.Column(db.String(256))
     deadline = db.Column(db.DateTime, index = True, unique = False)
-
+    Completed = db.Column(db.BooleanField)
     # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def set_deadline(self, deadline):

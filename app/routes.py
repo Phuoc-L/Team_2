@@ -41,7 +41,7 @@ def login():
         # page in this case.
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-          	next_page = url_for('task')
+          	next_page = url_for('taskmenu')
 
         return redirect(next_page)
 
@@ -105,3 +105,8 @@ def Create_Account():
             flash('Account Created')
 	
     return render_template('create_account.html', title='Create Account', form=form)
+
+@myapp.route('/taskmenu')
+def taskmenu():
+    #@login_required
+    return render_template('taskmenu.html')

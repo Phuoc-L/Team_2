@@ -29,7 +29,7 @@
 
 **Check Task:** Users can check tasks as they complete them.
 
-**Uncheck Task:**Users can check off the tasks when they complete them. 
+**Uncheck Task:** Users can check off the tasks when they complete them. 
 
 **Change Taskname:** Users can change the task name of their task. 
 

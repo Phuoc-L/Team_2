@@ -117,8 +117,8 @@ def checktask(id):
     task_to_check = Task.query.get_or_404(id)
     if task_to_check.completed == False:
         task_to_check.completed = True
-        db.session.commit()
     else:
         task_to_check.completed = False
-        db.session.commit()
+    db.session.add(task_to_check)
+    db.session.commit()
     return redirect('/taskmenu')

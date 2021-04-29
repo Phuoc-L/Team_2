@@ -33,7 +33,7 @@ class Task(db.Model):
 
     def set_deadline(self, deadline):
         self.deadline = datetime.strptime(deadline, '%m/%d/%Y')
-
+    
     def __repr__(self):
         return '<Task {}>'.format(self.task_description)
 

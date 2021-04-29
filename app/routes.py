@@ -3,11 +3,12 @@ from flask_login import current_user, login_user
 from flask_login import logout_user
 from flask_login import login_required
 
+
 from datetime import datetime
 
 from app import db
 from app import myapp
-from app.forms import LoginForm, TaskForm, SignUpForm
+from app.forms import LoginForm, TaskForm, SignUpForm, EditForm
 
 from app.models import User, Task
 
@@ -122,3 +123,19 @@ def checktask(id):
     db.session.add(task_to_check)
     db.session.commit()
     return redirect('/taskmenu')
+
+@myapp.route("/edit/<int:id>", methods = ["GET","POST"])
+def editTask(id):
+    form = EditForm()
+    if form.validate_on_submit():
+        task = Task.query.get_or_404(id)
+        task.task_name = form.task_name.data
+        db.session.add(task)
+        db.session.commit()
+        flash("Task Been Edited")
+        return redirect("/taskmenu")    
+    
+    posts = []
+    posts = posts + [{}]    
+
+    return render_template('editForm.html', title='Edit Task', form=form, posts=posts)

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title> Task Menu </title>
+        <style>
+            h1 {text-align: center;}
+            p {text-align: center;}
+            td {text-align: center}
+            table {border-spacing: 30px;}
+            .center {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="content">
+        <h1> TaskMate </h1>
+        <a href='/Logout'><p>Log out</p></a>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.task_name.label }}<br>
+                {{ form.task_name(size=32) }}
+            </p>
+                    <p>
+                {{ form.deadline.label }}<br>
+                {{ form.deadline(size=32) }}
+            </p>
+            <p>
+                {{ form.task_description.label }}<br>
+                {{ form.task_description(size=128) }}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+
+        <table class="center">
+            <tr>
+                <th>Task Name</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+            {% for post in posts %}
+            <tr>
+                <td>
+                    {{ post.Name }}
+                </td>
+                <td>
+                    {{ post.Description}}
+                </td>
+                <td>
+                    {{ post.Deadline }}
+                </td>
+                <td>
+                    {% if post.completed == 'False' %}
+                        Not Completed
+                    {% else %}
+                        Completed
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/deletetask/{{ post.id }}">Delete Task</a>
+                    <a href="/checktask/{{ post.id }}">Check Task</a>
+                    <a href="/edit/{{ post.id }}">Edit Task</a>
+                </td>
+            </tr>  
+            {% endfor %}
+          
+        </table>
+        <th></th>
+    </div>    
+    </body>
+</html>

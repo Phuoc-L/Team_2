@@ -70,6 +70,8 @@
                     <a href="/deletetask/{{ post.id }}">Delete Task</a>
                     {% if post.completed == 'False' %}
                         <a href="/checktask/{{ post.id }}">Check Task</a>
+                    {% else %}
+                        <a href="/unchecktask/{{ post.id }}">Uncheck Task</a>
                     {% endif %}
                     <a href="/edit/{{ post.id }}">Edit Task</a>
                 </td>

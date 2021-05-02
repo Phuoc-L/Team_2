@@ -126,19 +126,27 @@ def deletetask(id):
 
 @myapp.route('/checktask/<int:id>', methods = ["GET","POST"])
 def checktask(id):
-    task_to_check = Task.query.get_or_404(id)
     form = CheckOffTaskForm()
-    if task_to_check.completed == False:
-        if form.validate_on_submit():
-            task_to_check = Task.query.get_or_404(id)
-            task_to_check.set_date_completed(form.date_completed.data)
-            task_to_check.completed = True
-            db.session.add(task_to_check)
-            db.session.commit()
-            return redirect("/taskmenu")  
+    if form.validate_on_submit():
+        task_to_check = Task.query.get_or_404(id)
+        task_to_check.set_date_completed(form.date_completed.data)
+        task_to_check.completed = True
+        db.session.add(task_to_check)
+        db.session.commit()
+        return redirect("/taskmenu")  
     posts = []
     posts = posts + [{}]    
     return render_template('checkoff.html', title='Check off task', form=form, posts=posts)
+
+@myapp.route('/unchecktask/<int:id>')
+def unchecktask(id):
+    task_to_uncheck = Task.query.get_or_404(id)
+    task_to_uncheck.date_completed = None
+    task_to_uncheck.completed = False
+    db.session.add(task_to_uncheck)
+    db.session.commit()
+    return redirect("/taskmenu") 
+
 
 @myapp.route("/edit/<int:id>", methods = ["GET","POST"])
 def editTask(id):

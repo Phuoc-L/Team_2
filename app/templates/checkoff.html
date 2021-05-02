@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.date_completed.label }}<br>
+            {{ form.date_completed(size=32) }}
+        </p>
+        
+        
+        <p>{{ form.submit() }}</p>
+        
+        <p> <a href='/taskmenu'>Cancel</a> <br> </p>
+    </form>
+{% endblock %}

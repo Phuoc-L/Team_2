@@ -8,9 +8,9 @@ from datetime import datetime
 
 from app import db
 from app import myapp
-from app.forms import LoginForm, TaskForm, SignUpForm, EditForm
+from app.forms import LoginForm, TaskForm, SignUpForm, EditForm, TeamForm
 
-from app.models import User, Task
+from app.models import User, Task, Team
 
 # different URL the app will implement
 @myapp.route("/")
@@ -139,3 +139,23 @@ def editTask(id):
     posts = posts + [{}]    
 
     return render_template('editForm.html', title='Edit Task', form=form, posts=posts)
+
+@myapp.route("/team", methods = ["GET","POST"])
+def createTeam():
+    form =TeamForm()
+    if form.validate_on_submit():
+        team = Team.query.filter_by(team = form.team_name.data).first()
+        if team is not None:
+            new_team = Team(team = form.team_name.data)
+            user = User.query.filter_by(username = form.add_user.data).first()
+            user.team = new_team.id
+            db.session.add(new_team)
+            db.session.add(user)
+            db.session.commit()
+            flash("Team created")
+            return redirect("/taskmenu")
+            
+    posts = []
+    posts = posts + [{}]
+
+    return render_template('team.html', title = 'Team Name', form=form, posts = posts)

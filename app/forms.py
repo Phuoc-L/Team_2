@@ -25,6 +25,11 @@ class EditForm(FlaskForm):
 	task_name = StringField('Name of Task', validators = [DataRequired()])
 	submit = SubmitField('Submit Changes')
 
+class TeamForm(FlaskForm):
+    team_name = StringField("Name of Team", validators = [DataRequired()])
+    add_user = StringField("Name of user", validators = [DataRequired()])
+    submit = SubmitField('Create Team')
+
 
 
 

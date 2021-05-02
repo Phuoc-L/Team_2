@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String, nullable = False, unique = False)
     # email = db.Column(db.String(32), unique = True, nullable = False, index = True)
     password = db.Column(db.String(200), unique = False)
+    team = db.Column(db.Integer, db.ForeignKey('team.id'))
     #tasks = db.relationship('Task', backref = 'author', lazy = 'dynamic')
 
     def set_password(self, password):
@@ -36,6 +37,15 @@ class Task(db.Model):
     
     def __repr__(self):
         return '<Task {}>'.format(self.task_description)
+
+class Team(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    team = db.Column(db.String(256))
+    username = db.relationship('User', backref = 'teams', lazy = 'dynamic')
+
+    def __repr__(self):
+        return '<Team {}>'.format(self.team)
+
 
 @login.user_loader
 def load_user(id):

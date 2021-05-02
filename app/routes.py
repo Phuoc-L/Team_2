@@ -34,7 +34,6 @@ def login():
         # let flask_login library know what user logged int
         # it also means that their password was correct
         login_user(user, remember = form.remember_me.data)
-      
         # return to page before user got asked to login
         # for example, if user tried to access a wedpage called profile, but since they
         # weren't logged in they would get redirected to login page. After they log in
@@ -42,11 +41,11 @@ def login():
         # page in this case.
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-          	next_page = url_for('taskmenu')
+            next_page = url_for('taskmenu')
 
         return redirect(next_page)
 
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('login.html', title = 'Sign In', form = form)
 
 @myapp.route("/req")
 # user needs to be logged in to see this page
@@ -78,33 +77,33 @@ def Create_Account():
             db.session.commit()
             flash('Account Created')
 	
-    return render_template('create_account.html', title='Create Account', form=form)
+    return render_template('create_account.html', title = 'Create Account', form = form)
 
 @myapp.route('/taskmenu', methods = ['GET', 'POST'])
 def taskmenu():
     #@login_required
-   form = TaskForm()
-   if form.validate_on_submit():
-	    # create the new task
+    form = TaskForm()
+    if form.validate_on_submit():
+        # create the new task
         new_task = Task(task_name = form.task_name.data, task_description = form.task_description.data)
         new_task.set_deadline(form.deadline.data)
         db.session.add(new_task)
         db.session.commit()
-   
-   posts = []
-   alltask = Task.query.all()
-   if alltask is not None:
-       for atask in alltask:
+
+    posts = []
+    alltask = Task.query.all()
+    if alltask is not None:
+        for atask in alltask:
             posts = posts + [
             {	'Name':f'{atask.task_name}', 
                 'Description':f'{atask.task_description}',
-		        'Deadline':f'{atask.deadline.strftime("%m/%d/%Y")}',
+                'Deadline':f'{atask.deadline.strftime("%m/%d/%Y")}',
                 'id':f'{atask.id}',
                 'completed':f'{atask.completed}'
             }
             ] 
 
-   return render_template('taskmenu.html', title='Task', form=form, posts=posts)
+    return render_template('taskmenu.html', title = 'Task', form = form, posts = posts)
 
 @myapp.route('/deletetask/<int:id>')
 def deletetask(id):
@@ -138,24 +137,26 @@ def editTask(id):
     posts = []
     posts = posts + [{}]    
 
-    return render_template('editForm.html', title='Edit Task', form=form, posts=posts)
+    return render_template('editForm.html', title = 'Edit Task', form = form, posts = posts)
 
 @myapp.route("/team", methods = ["GET","POST"])
 def createTeam():
-    form =TeamForm()
+    form = TeamForm()
     if form.validate_on_submit():
         team = Team.query.filter_by(team = form.team_name.data).first()
-        if team is not None:
+        if team is None:
             new_team = Team(team = form.team_name.data)
-            user = User.query.filter_by(username = form.add_user.data).first()
-            user.team = new_team.id
             db.session.add(new_team)
-            db.session.add(user)
-            db.session.commit()
-            flash("Team created")
-            return redirect("/taskmenu")
-            
+            flash(f'Team {form.team_name.data} is created')
+        
+        tuser = User.query.filter_by(username = form.add_user.data).first()
+        tuser.team = Team.query.filter_by(team = form.team_name.data).first().id
+        db.session.add(tuser)
+        db.session.commit()
+        flash(f'The user {form.add_user.data} was added to team {form.team_name.data}')
+        #return redirect("/taskmenu")
+        
     posts = []
     posts = posts + [{}]
 
-    return render_template('team.html', title = 'Team Name', form=form, posts = posts)
+    return render_template('team.html', title = 'Team Name', form = form, posts = posts)

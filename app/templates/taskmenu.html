@@ -17,7 +17,7 @@
     <div class="content">
         <h1> TaskMate </h1>
         <a href='/Logout'><p>Log out</p></a>
-        <a href='/team'><p>Team</p></a>
+        <a href='/team'><p>Manage Team</p></a>
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <p>
@@ -41,6 +41,7 @@
                 <th>Description</th>
                 <th>Deadline</th>
                 <th>Completed</th>
+                <th>Assigned Team</th>
                 <th>Actions</th>
             </tr>
             {% for post in posts %}
@@ -62,13 +63,17 @@
                     {% endif %}
                 </td>
                 <td>
+                    {{ post.team }}
+                </td>
+                <td>
                     <a href="/deletetask/{{ post.id }}">Delete Task</a>
                     <a href="/checktask/{{ post.id }}">Check Task</a>
                     <a href="/edit/{{ post.id }}">Edit Task</a>
+                    <a href="/AssignTask/{{ post.id }}">Assign Task</a>
                 </td>
             </tr>  
             {% endfor %}
-          
+        
         </table>
         <th></th>
     </div>    

@@ -30,6 +30,7 @@ class Task(db.Model):
     task_description = db.Column(db.String(256))
     deadline = db.Column(db.DateTime, index = True, unique = False)
     completed = db.Column(db.Boolean, default = False)
+    team = db.Column(db.Integer, db.ForeignKey('team.id'))
     #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def set_deadline(self, deadline):
@@ -42,7 +43,7 @@ class Team(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     team = db.Column(db.String(256))
     username = db.relationship('User', backref = 'teams', lazy = 'dynamic')
-
+    task = db.relationship('Task', backref = 'teams', lazy = 'dynamic')
     def __repr__(self):
         return '<Team {}>'.format(self.team)
 

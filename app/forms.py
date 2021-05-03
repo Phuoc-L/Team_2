@@ -28,6 +28,9 @@ class TeamForm(FlaskForm):
     add_user = StringField("Name of user", validators = [DataRequired()])
     submit = SubmitField('Create Team')
 
+class AssignTeamForm(FlaskForm):
+    team = StringField('Name of Team', validators = [DataRequired()])
+    submit = SubmitField('Submit Changes')
 
 
 

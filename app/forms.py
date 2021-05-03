@@ -25,7 +25,6 @@ class EditForm(FlaskForm):
 	task_name = StringField('Name of Task', validators = [DataRequired()])
 	submit = SubmitField('Submit Changes')
 
-
-
-
-
+class CheckOffTaskForm(FlaskForm):
+    date_completed = StringField('Date Completed (mm/dd/yyyy)', validators = [DataRequired()])
+    submit = SubmitField('Submit Changes')

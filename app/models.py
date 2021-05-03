@@ -29,10 +29,15 @@ class Task(db.Model):
     task_description = db.Column(db.String(256))
     deadline = db.Column(db.DateTime, index = True, unique = False)
     completed = db.Column(db.Boolean, default = False)
+    date_completed = db.Column(db.DateTime, index = True, unique = False)
+    completed = db.Column(db.Boolean, default = False)
     #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def set_deadline(self, deadline):
         self.deadline = datetime.strptime(deadline, '%m/%d/%Y')
+
+    def set_date_completed(self, date_completed):
+        self.date_completed = datetime.strptime(date_completed, '%m/%d/%Y')
     
     def __repr__(self):
         return '<Task {}>'.format(self.task_description)

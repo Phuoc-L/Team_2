@@ -8,7 +8,7 @@ from datetime import datetime
 
 from app import db
 from app import myapp
-from app.forms import LoginForm, TaskForm, SignUpForm, EditForm
+from app.forms import LoginForm, TaskForm, SignUpForm, EditForm, CheckOffTaskForm
 
 from app.models import User, Task
 
@@ -95,37 +95,61 @@ def taskmenu():
    alltask = Task.query.all()
    if alltask is not None:
        for atask in alltask:
-            posts = posts + [
-            {	'Name':f'{atask.task_name}', 
-                'Description':f'{atask.task_description}',
-		        'Deadline':f'{atask.deadline.strftime("%m/%d/%Y")}',
-                'id':f'{atask.id}',
-                'completed':f'{atask.completed}'
-            }
-            ] 
+            if atask.date_completed is not None:
+                posts = posts + [
+                {	'Name':f'{atask.task_name}', 
+                    'Description':f'{atask.task_description}',
+                    'Deadline':f'{atask.deadline.strftime("%m/%d/%Y")}',
+                    'id':f'{atask.id}',
+                    'completed':f'{atask.completed}',
+                    'datecompleted':f'{atask.date_completed.strftime("%m/%d/%Y")}'
+                }
+                ] 
+            else:
+                posts = posts + [
+                  {	'Name':f'{atask.task_name}', 
+                    'Description':f'{atask.task_description}',
+                    'Deadline':f'{atask.deadline.strftime("%m/%d/%Y")}',
+                    'id':f'{atask.id}',
+                    'completed':f'{atask.completed}'
+                }
+                ]
 
    return render_template('taskmenu.html', title='Task', form=form, posts=posts)
 
 @myapp.route('/deletetask/<int:id>')
-def deletetask(id):
+def DeleteTask(id):
     task_to_delete = Task.query.get_or_404(id)
     db.session.delete(task_to_delete)
     db.session.commit()
     return redirect('/taskmenu')
 
-@myapp.route('/checktask/<int:id>')
-def checktask(id):
-    task_to_check = Task.query.get_or_404(id)
-    if task_to_check.completed == False:
+@myapp.route('/checktask/<int:id>', methods = ["GET","POST"])
+def CheckTask(id):
+    form = CheckOffTaskForm()
+    if form.validate_on_submit():
+        task_to_check = Task.query.get_or_404(id)
+        task_to_check.set_date_completed(form.date_completed.data)
         task_to_check.completed = True
-    else:
-        task_to_check.completed = False
-    db.session.add(task_to_check)
+        db.session.add(task_to_check)
+        db.session.commit()
+        return redirect("/taskmenu")  
+    posts = []
+    posts = posts + [{}]    
+    return render_template('checkoff.html', title='Check off task', form=form, posts=posts)
+
+@myapp.route('/unchecktask/<int:id>')
+def UncheckTask(id):
+    task_to_uncheck = Task.query.get_or_404(id)
+    task_to_uncheck.date_completed = None
+    task_to_uncheck.completed = False
+    db.session.add(task_to_uncheck)
     db.session.commit()
-    return redirect('/taskmenu')
+    return redirect("/taskmenu") 
+
 
 @myapp.route("/edit/<int:id>", methods = ["GET","POST"])
-def editTask(id):
+def EditTask(id):
     form = EditForm()
     if form.validate_on_submit():
         task = Task.query.get_or_404(id)
@@ -134,8 +158,12 @@ def editTask(id):
         db.session.commit()
         flash("Task Been Edited")
         return redirect("/taskmenu")    
-    
-    posts = []
-    posts = posts + [{}]    
+      
 
-    return render_template('editForm.html', title='Edit Task', form=form, posts=posts)
+    return render_template('editForm.html', title='Edit Task', form=form)
+
+@myapp.route("/taskinfo/<int:id>")
+def taskInfo(id):
+    task_to_view = Task.query.get_or_404(id)
+
+    return render_template('taskinfo.html', title='TaskInfo', name = task_to_view.task_name, description = task_to_view.task_description, deadline = task_to_view.deadline.strftime("%m/%d/%Y"))

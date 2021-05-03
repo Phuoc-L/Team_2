@@ -37,8 +37,6 @@
         <table class="center">
             <tr>
                 <th>Task Name</th>
-                <th>Description</th>
-                <th>Deadline</th>
                 <th>Completed</th>
                 <th>Date Completed</th>
                 <th>Actions</th>
@@ -47,12 +45,6 @@
             <tr>
                 <td>
                     {{ post.Name }}
-                </td>
-                <td>
-                    {{ post.Description}}
-                </td>
-                <td>
-                    {{ post.Deadline }}
                 </td>
                 <td>
                     {% if post.completed == 'False' %}
@@ -74,6 +66,7 @@
                         <a href="/unchecktask/{{ post.id }}">Uncheck Task</a>
                     {% endif %}
                     <a href="/edit/{{ post.id }}">Edit Task</a>
+                    <a href="/taskinfo/{{ post.id }}">View Task Info</a>
                 </td>
             </tr>  
             {% endfor %}

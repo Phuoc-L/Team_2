@@ -118,14 +118,14 @@ def taskmenu():
    return render_template('taskmenu.html', title='Task', form=form, posts=posts)
 
 @myapp.route('/deletetask/<int:id>')
-def deletetask(id):
+def DeleteTask(id):
     task_to_delete = Task.query.get_or_404(id)
     db.session.delete(task_to_delete)
     db.session.commit()
     return redirect('/taskmenu')
 
 @myapp.route('/checktask/<int:id>', methods = ["GET","POST"])
-def checktask(id):
+def CheckTask(id):
     form = CheckOffTaskForm()
     if form.validate_on_submit():
         task_to_check = Task.query.get_or_404(id)
@@ -139,7 +139,7 @@ def checktask(id):
     return render_template('checkoff.html', title='Check off task', form=form, posts=posts)
 
 @myapp.route('/unchecktask/<int:id>')
-def unchecktask(id):
+def UncheckTask(id):
     task_to_uncheck = Task.query.get_or_404(id)
     task_to_uncheck.date_completed = None
     task_to_uncheck.completed = False
@@ -149,7 +149,7 @@ def unchecktask(id):
 
 
 @myapp.route("/edit/<int:id>", methods = ["GET","POST"])
-def editTask(id):
+def EditTask(id):
     form = EditForm()
     if form.validate_on_submit():
         task = Task.query.get_or_404(id)
@@ -161,3 +161,9 @@ def editTask(id):
       
 
     return render_template('editForm.html', title='Edit Task', form=form)
+
+@myapp.route("/taskinfo/<int:id>")
+def taskInfo(id):
+    task_to_view = Task.query.get_or_404(id)
+
+    return render_template('taskinfo.html', title='TaskInfo', name = task_to_view.task_name, description = task_to_view.task_description, deadline = task_to_view.deadline.strftime("%m/%d/%Y"))

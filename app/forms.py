@@ -17,8 +17,6 @@ class TaskForm(FlaskForm):
     task_name = StringField('Name of Task', validators = [DataRequired()])
     task_description = StringField('Task Description', validators = [DataRequired()])
     deadline = StringField('Deadline (mm/dd/yyyy)', validators = [DataRequired()])
-	#group = 
-	#team = 
     submit = SubmitField('Create Task')
 
 class EditForm(FlaskForm):
@@ -28,3 +26,16 @@ class EditForm(FlaskForm):
 class CheckOffTaskForm(FlaskForm):
     date_completed = StringField('Date Completed (mm/dd/yyyy)', validators = [DataRequired()])
     submit = SubmitField('Submit Changes')
+    
+class TeamForm(FlaskForm):
+    team_name = StringField("Name of Team", validators = [DataRequired()])
+    add_user = StringField("Name of user", validators = [DataRequired()])
+    submit = SubmitField('Create Team')
+
+class AssignTeamForm(FlaskForm):
+    team = StringField('Name of Team', validators = [DataRequired()])
+    submit = SubmitField('Submit Changes')
+
+
+
+

@@ -16,13 +16,13 @@
 * Change Task Description
 * Check Task
 * Uncheck Task
-* View Completed Tasks
-* View Uncompleted Tasks
-* View Task Description
+* View Task Information
+* Assign Team
+* Add Completion Date
 * Change Task Deadline
 * Log In
 * Log Out
-* Create group
+* Sign Up
 * Create Team
 * Assign Task
 
@@ -137,53 +137,57 @@ Click on it .
 ## Primary Postconditions
 * postcondition: The number of desired tasks that don’t have a black check mark in the box would be shown as the number of tasks that haven't been completed.
 
-# Task: View Completed Tasks
+# Task: View Task Information
 ## Summary
-A user who has logged in can view all completed tasks
+A user who has logged in can view a task's name, description, deadline, completion date, and assigned team.
 ## Actors
 The user
 ## Preconditions
 * The user is logged in
 ## Triggers
-The user have to click the view completed task button
+The user has to click the view task information button
 ## Primary Sequence
-The system will prompt the user with”are you sure you want to view only completed tasks?
-The user clicks confirm”
+The user is rerouted to a page with a list of the selected task's information
 ## Primary Postconditions
-* The system will only show completed tasks
+* The system will display the task's information
+* The user can select the "back" button to return to the task menu
 
-# Task: View Uncompleted Tasks
+# Task: Assign Team
 ## Summary
-A user who has logged in can view all uncompleted tasks
+A user who has logged in can assign a task to an existing team
 ## Actors
 The user
 ## Preconditions
 * The user is logged in
 ## Triggers
-The user have to click the view uncompleted task button
+The user has to select the "assign team" button
 ## Primary Sequence
-The system will prompt the user with”are you sure you want to view only uncompleted tasks?
-The user clicks “confirm”.
+The user will be rerouted to a separate page where they can assign the task to a team
+The system will prompt the user to enter the team name they want the task to be assigned to
+The user clicks the confirm button
 ## Primary Postconditions
-* The system will only show uncompleted tasks
+* The task will be assigned to a team
+## Alternate Postconditions
+* If the team does not exist, the system will display the message "The team does not exist"
+* The system will prompt the user to re-enter the team name
 
-# Task: View Description
+# Task: Add Completion Date
 ## Summary
-A user who wants to see the description of the task they have done and are about to do. 
+A user who is logged in can add the completion date to their task when they finish the task
 ## Actors
 The user
 ## Preconditions
 User is already logged in.
-User has determined the number of tasks they have done and what they are.
-User has already written what they need to do for their tasks.
+The task exists.
+The user has completed the task.
 ## Triggers
-The user clicks on the task name and the description will be in a separate window.
+The user selects the "check task" button
 ## Primary Sequence
-* Hover over name of the task
-* Click on it .
-* Another window would appear to show the description of what the task is about. 
+* The user is rerouted to a new page where they can enter their completion date
+* The user clicks confirm
 ## Primary Postconditions
-* postcondition: The user can see the description of what they need to do. 
+* The task is marked "completed"
+* The completion date is added to the task
 
 # Task: Change task deadline
 ## Summary
@@ -244,34 +248,24 @@ The user clicks on yes to log out of their account.
 * The user clicks “cancel”
 	* The user is not logged out of their account
 
-# Task: Create Group
+# Task: Sign Up
 ## Summary
-A user can create and add other users to their group. Different groups cannot view another group’s tasks.
+A user can create an account to sign into TaskMate
 ## Actors
 The user
-Other users
 ## Preconditions
-* The user is logged into their account.
-* The name of this group should not match other group names
-* The other user has an account.
+* The user does not have an account
+* The username is available
 ## Triggers
-The user clicks on the create group button.
+The user selects the "create account" button
 ## Primary Sequence
-	1.The system will prompt the user with a “enter the name of this group”.
-	2.The user enter a name for this group
-	3.The user clicks confirm
-	4.The system will prompt the user with a list of users who are not in a group.
-	5.The user will then choose one or more users to be assigned to a group.
-	6.The user clicks confirm
+* The user is rerouted to a new page where they can choose their username and password
+* The user selects the "create account" button
 ## Primary Postconditions
-* A group is created and the selected group members are assigned to the group
+* The user's account is created
 ## Alternate Sequences
-* The system will prompt the user with a “enter the name of this group”.
-	* The user clicks “cancel”
-		* No group is created
-* The system will prompt the user with a list of users who are not in a group.
-	* The user clicks “cancel”
-		* No group is created
+* The username not available
+* The user is prompted to re-enter a new username
 
 # Task: Create Team
 ## Summary
@@ -326,9 +320,9 @@ One user can assign an already existing task to another user
 
 
 ## Non-Functional Requirements
-* The user can switch between light and dark mode
 * The system responds to the user within 1 second.
 * The menu is clear to see and navigate.
+* 
 
 ## Glossary
 * User: The person navigating the system through their computer. 

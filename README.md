@@ -8,8 +8,7 @@
 **TaskMate is a task management software that allows users to keep track of tasks and collaborate with other users on collective tasks. We programmed this task management as a way for people to interact and manage their projects with a team.**
 
 ## Installation
-**From Github, the user would have to download the Taskmate application.
-**In order for users to use the task management app, they would need to run it through a linux operating system and download all of the files through github.**
+**From Github, the user would have to download the Taskmate application. In order for users to use the task management app, they would need to run it through a linux operating system and download all of the files through github.** 
 
 ## How to Use
 **When the user starts the application, they would need to make an account which has a username and a password. The user can create new tasks, add a description, and the deadline  for when it is due. The user is also able to mark when the task is completed.** 

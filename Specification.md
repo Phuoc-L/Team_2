@@ -322,7 +322,7 @@ One user can assign an already existing task to another user
 ## Non-Functional Requirements
 * The system responds to the user within 1 second.
 * The menu is clear to see and navigate.
-* 
+* Users will be able to access the task menu reliably. 
 
 ## Glossary
 * User: The person navigating the system through their computer. 

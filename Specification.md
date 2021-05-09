@@ -329,5 +329,5 @@ One user can assign an already existing task to another user
 * System: The website
 * Another user: Any person that is not the current user and is also in the same team
 
-![Diagram](https://drive.google.com/uc?export=view&id=1DTrUHIgYjbrrRcfo7iy68ULpFPdPv2wK)
+![Diagram](https://drive.google.com/uc?export=view&id=15xf-fMaqV9WZBsCRTYi4JCxqpK6NZpm5)
 

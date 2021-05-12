@@ -8,7 +8,17 @@
         <p>
             {{ form.task_name.label }}<br>
             {{ form.task_name(size=32) }}
+            
         </p>
+        <p>
+            {{ form.task_description.label }}<br>
+            {{ form.task_description(size=32) }}
+        </p>
+        <p>
+            {{ form.deadline.label }}<br>
+            {{ form.deadline(size=32) }}
+        </p>
+
         
         
         <p>{{ form.submit() }}</p>

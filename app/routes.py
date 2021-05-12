@@ -176,12 +176,15 @@ def EditTask(id):
     if form.validate_on_submit():
         task = Task.query.get_or_404(id)
         task.task_name = form.task_name.data
+        task.task_description = form.task_description.data
+        task.set_deadline(form.deadline.data)
         db.session.add(task)
         db.session.commit()
         flash("Task Been Edited")
         return redirect("/taskmenu")
 
     return render_template('editForm.html', title='Edit Task', form=form)
+
 
 @myapp.route("/taskinfo/<int:id>")
 def taskInfo(id):

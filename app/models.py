@@ -35,6 +35,7 @@ class Task(db.Model):
     team = db.Column(db.Integer, db.ForeignKey('team.id'))
     #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    #Used to set the deadline
     def set_deadline(self, deadline):
         self.deadline = datetime.strptime(deadline, '%m/%d/%Y')
 

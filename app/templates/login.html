@@ -1,19 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
+    
+
+    <section class="container-fluid bg">
+    <section class="row justify-content-center">
+    <section class="col-12 col-sm-6 col-md-3">
+
     <h1>Sign In</h1>
     <p> <a href='/CreateAccount'>Create Account</a> <br> </p>
-    <form action="" method="post" novalidate>
+    <form action="" method="post" class= "form-container" novalidate >
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
+           <div class="form-group">
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32) }}
+            </p>
+            </div>
+
+            <div class="form-group">
+
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32) }}
+            </p>
+            </div>
+            <div class="form-group">
+            <p>
+                {{ form.remember_me() }} 
+                {{ form.remember_me.label }}
+            </p>
+            </div>
+            <div class="form-group">
+            <p>{{ form.submit() }}</p>
+
     </form>
+    </section>
+    </section>
+    </section>
 {% endblock %}
+

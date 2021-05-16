@@ -75,20 +75,14 @@ def Create_Account():
             new_user.set_password(form.password.data)
             db.session.add(new_user)
             db.session.commit()
-            flash('Account Created')
+            return redirect('/login')
 	
     return render_template('create_account.html', title = 'Create Account', form = form)
 
 @myapp.route('/taskmenu', methods = ['GET', 'POST'])
 def taskmenu():
     #@login_required
-    form = TaskForm()
-    if form.validate_on_submit():
-        # create the new task
-        new_task = Task(task_name = form.task_name.data, task_description = form.task_description.data)
-        new_task.set_deadline(form.deadline.data)
-        db.session.add(new_task)
-        db.session.commit()
+    
 
     posts = []
     alltask = Task.query.all()
@@ -137,7 +131,20 @@ def taskmenu():
                 }
                 ]
 
-    return render_template('taskmenu.html', title = 'Task', form = form, posts = posts)
+    return render_template('taskmenu.html', title = 'Task', posts = posts)
+
+@myapp.route('/createtask', methods = ["GET","POST"])
+def CreateTask():
+    form = TaskForm()
+    if form.validate_on_submit():
+        # create the new task
+        new_task = Task(task_name = form.task_name.data, task_description = form.task_description.data)
+        new_task.set_deadline(form.deadline.data)
+        db.session.add(new_task)
+        db.session.commit()
+        return redirect('/taskmenu')
+    return render_template('createtask.html', title='Create Task', form=form)
+
 
 @myapp.route('/deletetask/<int:id>')
 def DeleteTask(id):
@@ -189,7 +196,7 @@ def EditTask(id):
 @myapp.route("/taskinfo/<int:id>")
 def taskInfo(id):
     task_to_view = Task.query.get_or_404(id)
-    return render_template('taskinfo.html', title='TaskInfo', name = task_to_view.task_name, description = task_to_view.task_description, deadline = task_to_view.deadline.strftime("%m/%d/%Y"))
+    return render_template('taskinfo.html', title='TaskInfo', name = task_to_view.task_name, description = task_to_view.task_description, deadline = task_to_view.deadline.strftime("%m/%d/%Y"), team = task_to_view.team)
 
 @myapp.route("/AssignTask/<int:id>", methods = ["GET","POST"])
 def AssignTeam(id):

@@ -1,12 +1,17 @@
-{% extends "base.html" %}
-
-{% block content %}
+<!doctype html>
+<html lang="en" style="height:100%; width:100%;">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
+    </head>
+    <header>
+        
+    </header>
+    <body>
+    <div class="div1"> 
     <section class="container-fluid bg">
     <section class="row justify-content-center">
     <section class="col-12 col-sm-6 col-md-3">
-
-    <h1>Create Account</h1>
-    <p> <a href='/login'>Login</a> <br> </p>
+    <img src="{{ url_for('static', filename='img/logo.png')}}" alt="logo" class="loginlogo">
     <form action="" method="post" class= "form-container" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -19,7 +24,15 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
-{% endblock %}
+    <p> <a href='/login'>Already have an account?</a> <br> </p>
+        </p>
+        </section>
+        </section>
+        </section>
+    </div>
+    </body>
+</html> 
+
 
 
 

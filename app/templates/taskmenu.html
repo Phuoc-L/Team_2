@@ -2,50 +2,47 @@
 <html lang='en'>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style.css">
-
         <title> Task Menu </title>
-        <style>
-            h1 {text-align: center;}
-            p {text-align: center;}
-            td {text-align: center}
-            table {border-spacing: 30px;}
-            .center {
-                margin-left: auto;
-                margin-right: auto;
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
+        <script>
+            function myFunction() {
+                document.getElementById("actionDropdown").classList.toggle("show");
             }
-        </style>
-    </head>
-    <body>
-    <div class="content">
-        <h1> TaskMate </h1>
-        <a href='/Logout'><p>Log out</p></a>
-        <a href='/team'><p>Manage Team</p></a>
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.task_name.label }}<br>
-                {{ form.task_name(size=32) }}
-            </p>
-                    <p>
-                {{ form.deadline.label }}<br>
-                {{ form.deadline(size=32) }}
-            </p>
-            <p>
-                {{ form.task_description.label }}<br>
-                {{ form.task_description(size=128) }}
-            </p>
-            <p>{{ form.submit() }}</p>
-        </form>
 
+            window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var showDropdown = dropdowns[i];
+                    if (showDropdown.classList.contains('show')) {
+                        showDropdown.classList.remove('show');
+                    }
+                }
+            }
+        } 
+        </script>
+        
+    </head>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='img/logo.png')}}" class="logo">
+            <nav>
+                <ul>
+                    <li><a href='/taskmenu'>HOME</a></li>
+                    <li><a href='/createtask'>CREATE TASK</a></li>
+                    <li><a href='/team'>MANAGE TEAM</a></li>
+                    <li><a href='/Logout'>LOG OUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <body>
+        <div class="div2">
         <table class="center">
             <tr>
-                <th>Task Name</th>
-                <th>Completed</th>
-                <th>Date Completed</th>
-                <th>Assigned Team</th>
+                <th>Task</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
             {% for post in posts %}
@@ -60,30 +57,26 @@
                         Completed
                     {% endif %}
                 </td>
-                <td>
-                    {% if post.completed == 'True' %}
-                        {{ post.datecompleted }}
-                    {% endif %}
-                </td>
-                <td>
-                    {{ post.team }}
-                </td>
-                <td>
-                    <a href="/deletetask/{{ post.id }}">Delete Task</a>
-                    {% if post.completed == 'False' %}
-                        <a href="/checktask/{{ post.id }}">Check Task</a>
-                    {% else %}
-                        <a href="/unchecktask/{{ post.id }}">Uncheck Task</a>
-                    {% endif %}
-                    <a href="/edit/{{ post.id }}">Edit Task</a>
-                    <a href="/taskinfo/{{ post.id }}">View Task Info</a>
-                    <a href="/AssignTask/{{ post.id }}">Assign Task</a>
-                </td>
+                <td> 
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">...</button>
+                        <div id="actionDropdown" class="dropdown-content">
+                            <a href="/deletetask/{{ post.id }}">Delete Task</a>
+                            {% if post.completed == 'False' %}
+                                <a href="/checktask/{{ post.id }}">Check Task</a>
+                            {% else %}
+                                <a href="/unchecktask/{{ post.id }}">Uncheck Task</a>
+                            {% endif %}
+                            <a href="/edit/{{ post.id }}">Edit Task</a>
+                            <a href="/taskinfo/{{ post.id }}">View Task Info</a>
+                            <a href="/AssignTask/{{ post.id }}">Assign Task</a>
+                        </div>
+                    </div>    
+                </td> 
             </tr>  
             {% endfor %}
         
-        </table>
-        <th></th>
+        </table>  
     </div>    
     </body>
 </html>

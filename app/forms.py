@@ -9,8 +9,8 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 class SignUpForm(FlaskForm):
-    username = StringField('Username', validators = [DataRequired()])
-    password = PasswordField('Password', validators = [DataRequired()])
+    username = StringField('Create Username', validators = [DataRequired()])
+    password = PasswordField('Create Password', validators = [DataRequired()])
     submit = SubmitField('Create Account')
 
 class TaskForm(FlaskForm):
@@ -31,7 +31,7 @@ class CheckOffTaskForm(FlaskForm):
     
 class TeamForm(FlaskForm):
     team_name = StringField("Name of Team", validators = [DataRequired()])
-    add_user = StringField("Name of user", validators = [DataRequired()])
+    add_user = StringField("Name of User", validators = [DataRequired()])
     submit = SubmitField('Create Team')
 
 class AssignTeamForm(FlaskForm):

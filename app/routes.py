@@ -182,9 +182,12 @@ def EditTask(id):
     form = EditForm()
     if form.validate_on_submit():
         task = Task.query.get_or_404(id)
-        task.task_name = form.task_name.data
-        task.task_description = form.task_description.data
-        task.set_deadline(form.deadline.data)
+        if form.task_name.data is not '':
+            task.task_name = form.task_name.data
+        if form.task_description.data is not '':
+            task.task_description = form.task_description.data
+        if form.deadline.data is not '':
+            task.set_deadline(form.deadline.data)
         db.session.add(task)
         db.session.commit()
         flash("Task Been Edited")

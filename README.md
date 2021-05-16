@@ -2,7 +2,7 @@
 # TaskMate
 
 ## Github Issue Gantt Chart
-![Diagram](https://drive.google.com/uc?export=view&id=1nbctSLuSaKuJ9mq5h9T-7bv0XgeJs9Yr)
+![Diagram](https://drive.google.com/uc?export=view&id=173WHNNMt0rGQlFGXlvqi-hdOMimK8-tD)
 
 ## Introduction: 
 **TaskMate is a task management software that allows users to keep track of tasks and collaborate with other users on collective tasks. We programmed this task management as a way for people to interact and manage their projects with a team.**

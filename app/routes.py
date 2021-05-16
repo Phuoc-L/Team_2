@@ -196,7 +196,11 @@ def EditTask(id):
 @myapp.route("/taskinfo/<int:id>")
 def taskInfo(id):
     task_to_view = Task.query.get_or_404(id)
-    return render_template('taskinfo.html', title='TaskInfo', name = task_to_view.task_name, description = task_to_view.task_description, deadline = task_to_view.deadline.strftime("%m/%d/%Y"), team = task_to_view.team)
+    if task_to_view.date_completed is None:
+        date_completed = 'None'
+    else:
+        date_completed = task_to_view.date_completed.strftime("%m/%d/%Y")
+    return render_template('taskinfo.html', title='TaskInfo', name = task_to_view.task_name, description = task_to_view.task_description, deadline = task_to_view.deadline.strftime("%m/%d/%Y"), date_completed = date_completed, team = task_to_view.team)
 
 @myapp.route("/AssignTask/<int:id>", methods = ["GET","POST"])
 def AssignTeam(id):

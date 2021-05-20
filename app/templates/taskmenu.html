@@ -1,24 +1,53 @@
-<!DOCTYPE html>
-<html lang='en'>
+<!doctype html>
+<html lang="en" style="height:100%; width:100%;">
+
     <head>
-        <meta charset="utf-8">
-        <title> Task Menu </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
-    </head>
-    <header>
-        <div class="container">
-            <img src="{{ url_for('static', filename='img/logo.png')}}" class="logo">
-            <nav>
-                <ul>
-                    <li><a href='/taskmenu'>HOME</a></li>
-                    <li><a href='/createtask'>CREATE TASK</a></li>
-                    <li><a href='/team'>MANAGE TEAM</a></li>
-                    <li><a href='/Logout'>LOG OUT</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task Mate</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
+    <link rel="stylesheet" href="https://m.w3newbie.com/you-tube.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
+</head>
+
+
+
+
     <body>
+
+             <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/taskmenu"><img src="{{ url_for('static', filename='img/logo.png')}}" class="logo"></a>        
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class = "nac-item">
+                        <a class="nav-link" href='/taskmenu' >Home</a>
+                    </li>
+                    <li class = "nac-item">
+                        <a class="nav-link" href='/createtask' >Create Task</a>
+                    </li>
+                    <li class = "nac-item">
+                        <a class="nav-link" href='/team' >Manage Team</a>
+                    </li>
+                    <li class = "nac-item">
+                        <a class="nav-link" href='/Logout'>Log Out</a>
+                    </li>
+                </ul>
+            </div>
+         </div>  
+        </nav>
+
+
+
         <div class="div2">
         {% with messages = get_flashed_messages() %}
         {% if messages %}

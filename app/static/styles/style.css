@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+
+
 html, body
 {
   color: #222;
@@ -15,6 +19,14 @@ html, body
   font-family: 'Montserrat', sans-serif;
   color: #616971;
 }
+
+
+.container-fluid {
+    padding-right:0;
+    padding-left:0;
+    margin-right:auto;
+    margin-left:auto
+ }
 
 
 #navbar {
@@ -45,11 +57,13 @@ p {
   color: white;
   background: rgba(184, 163, 126, 0.8);
   padding: 0 px;
-  display: block; 
+  display: inline-block; 
   position: relative;
   overflow: auto;
   height: 80vh;
   font-family: "Arial Rounded MT Bold", "Arial Rounded MT Bold", monospace;
+}
+
 }
 
 .loginlogo{
@@ -84,7 +98,6 @@ header::after {
 
 .logo {
   float: left;
-  width: 30%;
 }
 
 nav {
@@ -150,13 +163,37 @@ table {
 }
 
 
+
+
+
+
+
+/*---Media Queries --*/
+@media (max-width: 992px) {
+
+  }
+@media (max-width: 768px) {
+  
+}
+@media (max-width: 576px) {
+  
 }
 
-/*-- Fixed Background Image --*/
-.fixed-background {
+
+/*---Firefox Bug Fix --*/
+.carousel-item {
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+/*--- Fixed Background Image --*/
+figure {
   position: relative;
   width: 100%;
-  z-index: 1000!important;
+  height: 60%;
+  margin: 0!important;
 }
 .fixed-wrap {
   clip: rect(0, auto, auto, 0);
@@ -165,10 +202,10 @@ table {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -999 !important;
 }
-.fixed {
-  z-index: -999!important;
+#fixed {
+  background-image: url('img/mac.png');
+  position: fixed;
   display: block;
   top: 0;
   left: 0;
@@ -177,14 +214,34 @@ table {
   background-size: cover;
   background-position: center center;
   -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+          transform: translateZ(0);
   will-change: transform;
 }
-/* Devices under 1199px (xl) */
-@media (max-width: 1199.98px) {
-
+/*--- Bootstrap Padding Fix --*/
+[class*="col-"] {
+    padding: 1rem;
 }
-/* Devices under 768px (md) */
-@media (max-width: 767.98px) {
 
-}
+
+
+
+
+/*
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+*/
+
+
+

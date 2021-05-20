@@ -20,9 +20,9 @@ class TaskForm(FlaskForm):
     submit = SubmitField('Create Task')
 
 class EditForm(FlaskForm):
-    task_name = StringField('New Task Name', validators = [DataRequired()])
-    task_description = StringField('New Description', validators = [DataRequired()])
-    deadline = StringField('New Deadline (mm/dd/yyy)',validators = [DataRequired()])
+    task_name = StringField('New Task Name')
+    task_description = StringField('New Description')
+    deadline = StringField('New Deadline (mm/dd/yyy)')
     submit = SubmitField('Submit Changes')
 
 class CheckOffTaskForm(FlaskForm):

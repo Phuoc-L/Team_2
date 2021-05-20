@@ -20,6 +20,15 @@
     </header>
     <body>
         <div class="div2">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         <table class="center">
             <tr>
                 <th>Task</th>
@@ -39,15 +48,15 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="/deletetask/{{ post.id }}">Delete Task</a>
+                    <a href="/deletetask/{{ post.id }}"><img src="{{ url_for('static', filename='img/delete.png')}}" width = "15%" height = "auto" /></a>
                     {% if post.completed == 'False' %}
-                        <a href="/checktask/{{ post.id }}">Check Task</a>
+                        <a href="/checktask/{{ post.id }}"><img src="{{ url_for('static', filename='img/check.png')}}"width = "15%" height = "auto" /></a>
                     {% else %}
-                        <a href="/unchecktask/{{ post.id }}">Uncheck Task</a>
+                        <a href="/unchecktask/{{ post.id }}"><img src="{{ url_for('static', filename='img/check.png')}}" width = "15%" height = "auto" /></a>
                     {% endif %}
-                    <a href="/edit/{{ post.id }}">Edit Task</a>
-                    <a href="/taskinfo/{{ post.id }}">View Task Info</a>
-                    <a href="/AssignTask/{{ post.id }}">Assign Task</a>
+                    <a href="/edit/{{ post.id }}"><img src="{{ url_for('static', filename='img/Edit.png')}}" width = "15%" height = "auto" /></a>
+                    <a href="/taskinfo/{{ post.id }}"><img src="{{ url_for('static', filename='img/View.png')}}" width = "15%" height = "auto" /></a>
+                    <a href="/AssignTask/{{ post.id }}"><img src="{{ url_for('static', filename='img/Assign.png')}}" width = "15%" height = "auto" /></a>
                 </td> 
             </tr>  
             {% endfor %}

@@ -75,7 +75,11 @@ def Create_Account():
             new_user.set_password(form.password.data)
             db.session.add(new_user)
             db.session.commit()
+            flash(f'The user {form.username.data} is created')
             return redirect('/login')
+        elif user is not None:
+            flash(f'The user {form.username.data} already exist.')
+        
 	
     return render_template('create_account.html', title = 'Create Account', form = form)
 
@@ -142,6 +146,7 @@ def CreateTask():
         new_task.set_deadline(form.deadline.data)
         db.session.add(new_task)
         db.session.commit()
+        flash('New Task Created')
         return redirect('/taskmenu')
     return render_template('createtask.html', title='Create Task', form=form)
 
@@ -151,6 +156,7 @@ def DeleteTask(id):
     task_to_delete = Task.query.get_or_404(id)
     db.session.delete(task_to_delete)
     db.session.commit()
+    flash('Task Has Been Deleted')
     return redirect('/taskmenu')
 
 @myapp.route('/checktask/<int:id>', methods = ["GET","POST"])
@@ -182,12 +188,15 @@ def EditTask(id):
     form = EditForm()
     if form.validate_on_submit():
         task = Task.query.get_or_404(id)
-        task.task_name = form.task_name.data
-        task.task_description = form.task_description.data
-        task.set_deadline(form.deadline.data)
+        if form.task_name.data is not '':
+            task.task_name = form.task_name.data
+        if form.task_description.data is not '':
+            task.task_description = form.task_description.data
+        if form.deadline.data is not '':
+            task.set_deadline(form.deadline.data)
         db.session.add(task)
         db.session.commit()
-        flash("Task Been Edited")
+        flash("Task Has Been Edited")
         return redirect("/taskmenu")
 
     return render_template('editForm.html', title='Edit Task', form=form)
@@ -196,7 +205,15 @@ def EditTask(id):
 @myapp.route("/taskinfo/<int:id>")
 def taskInfo(id):
     task_to_view = Task.query.get_or_404(id)
-    return render_template('taskinfo.html', title='TaskInfo', name = task_to_view.task_name, description = task_to_view.task_description, deadline = task_to_view.deadline.strftime("%m/%d/%Y"), team = task_to_view.team)
+    if task_to_view.date_completed is None:
+        date_completed = 'None'
+    else:
+        date_completed = task_to_view.date_completed.strftime("%m/%d/%Y")
+    if task_to_view.team is not None:
+        team = team = Team.query.filter_by(id = task_to_view.team).first().team
+    else:
+        team = 'None'
+    return render_template('taskinfo.html', title='TaskInfo', name = task_to_view.task_name, description = task_to_view.task_description, deadline = task_to_view.deadline.strftime("%m/%d/%Y"), date_completed = date_completed, team = team)
 
 @myapp.route("/AssignTask/<int:id>", methods = ["GET","POST"])
 def AssignTeam(id):
@@ -207,7 +224,7 @@ def AssignTeam(id):
             flash(f'The team {form.team.data} does not exist')
             return redirect(f"/AssignTask/{id}")
         task = Task.query.get_or_404(id)
-        task.team = id
+        task.team = team.id
         db.session.add(task)
         db.session.add(team)
         db.session.commit()

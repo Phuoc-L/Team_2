@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" style="height:100%; width:100%;">
+    <head>
+        
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Task Mate</title>
+	<!-- Bootstrap 4.5 CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css')}}">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
+
+
+    </head>
+
+    <body>
+        
+        <!-- Navigation -->
+
+        <nav class="navbar bg-light navbar-light navbar-expand-lg">
+            <div class= "container">
+
+                <a class="navbar-brand" href="/taskmenu"><img src="{{ url_for('static', filename='img/logo.png')}}" class="logo"></a>
+
+                <button class = "navbar-toggler">
+                    <span class = "navbar-toggler-icon"></span>
+                </button>
+
+                
+            </div>
+        </nav>
+
+
+
+        <!-- Navigation 
+        <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/taskmenu"><img src="{{ url_for('static', filename='img/logo.png')}}" class="logo"></a>        
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" style="color:#e1e8f0" href="/taskmenu">Home</a> 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:#e1e8f0" href="'/createtask">Create Task</a> 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:#e1e8f0" href="/team">Manage Team</a>   
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:#e1e8f0" href="/Logout">Log Out</a>      
+                    </li>
+            </div>  
+        </nav>
+        -->
+    
+    <!-- jQuery -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap 4.5 JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Popper JS -->
+    <script src="js/popper.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="js/all.min.js"></script>
+
+    <!-- End Script Source Files -->
+
+    </body>
+</html> 
+

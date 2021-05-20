@@ -13,6 +13,15 @@
     <section class="col-12 col-sm-6 col-md-3">
     <img src="{{ url_for('static', filename='img/logo.png')}}" alt="logo" class="loginlogo">
     <form action="" method="post" class= "form-container" novalidate>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
@@ -22,9 +31,10 @@
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>
+            <a href='/login'> Back</a> 
+            {{ form.submit() }}</p>
     </form>
-    <p> <a href='/login'>Already have an account?</a> <br> </p>
         </p>
         </section>
         </section>

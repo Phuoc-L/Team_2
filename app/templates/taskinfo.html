@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>
+    Task Name:
+    {{ name }}
+</p>
+
+<p>
+    Description:
+    {{ description }}
+</p>
+
+<p>
+    Deadline:
+    {{ deadline }}
+</p>
+
+<p>
+    Date Completed:
+    {{ date_completed }}
+</p>
+
+<p>
+    Team:
+    {{ team }}
+</p>
+<p> <a href='/taskmenu'>Return to Task Menu</a> <br> </p>
+{% endblock %}

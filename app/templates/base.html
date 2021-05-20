@@ -1,23 +1,35 @@
-<html>
+<!doctype html>
+<html lang="en" style="height:100%; width:100%;">
     <head>
-        {% if title %}
-        <title>{{ title }}</title>
-        {% else %}
-        <title>Home Page - my blog</title>
-        {% endif %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
     </head>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='img/logo.png')}}" class="logo">
+            <nav>
+                <ul>
+                    <li><a href='/taskmenu'>HOME</a></li>
+                    <li><a href='/createtask'>CREATE TASK</a></li>
+                    <li><a href='/team'>MANAGE TEAM</a></li>
+                    <li><a href='/Logout'>LOG OUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     <body>
+        <div class="div1">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+                <li>{{ message }}</li>
             {% endfor %}
         </ul>
         {% endif %}
         {% endwith %}
-
         {% block content %}
         {% endblock %}
+        </div>
     </body>
 </html> 
+

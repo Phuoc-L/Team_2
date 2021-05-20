@@ -1,57 +1,44 @@
 <!DOCTYPE html>
 <html lang='en'>
     <head>
+        <meta charset="utf-8">
         <title> Task Menu </title>
-        <style>
-            h1 {text-align: center;}
-            p {text-align: center;}
-            td {text-align: center}
-            table {border-spacing: 30px;}
-            .center {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        </style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
     </head>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='img/logo.png')}}" class="logo">
+            <nav>
+                <ul>
+                    <li><a href='/taskmenu'>HOME</a></li>
+                    <li><a href='/createtask'>CREATE TASK</a></li>
+                    <li><a href='/team'>MANAGE TEAM</a></li>
+                    <li><a href='/Logout'>LOG OUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     <body>
-    <div class="content">
-        <h1> TaskMate </h1>
-        <a href='/Logout'><p>Log out</p></a>
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.task_name.label }}<br>
-                {{ form.task_name(size=32) }}
-            </p>
-                    <p>
-                {{ form.deadline.label }}<br>
-                {{ form.deadline(size=32) }}
-            </p>
-            <p>
-                {{ form.task_description.label }}<br>
-                {{ form.task_description(size=128) }}
-            </p>
-            <p>{{ form.submit() }}</p>
-        </form>
-
+        <div class="div2">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         <table class="center">
             <tr>
-                <th>Task Name</th>
-                <th>Description</th>
-                <th>Deadline</th>
-                <th>Completed</th>
+                <th>Task</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
             {% for post in posts %}
             <tr>
                 <td>
                     {{ post.Name }}
-                </td>
-                <td>
-                    {{ post.Description}}
-                </td>
-                <td>
-                    {{ post.Deadline }}
                 </td>
                 <td>
                     {% if post.completed == 'False' %}
@@ -61,15 +48,20 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="/deletetask/{{ post.id }}">Delete Task</a>
-                    <a href="/checktask/{{ post.id }}">Check Task</a>
-                    <a href="/edit/{{ post.id }}">Edit Task</a>
-                </td>
+                    <a href="/deletetask/{{ post.id }}"><img src="{{ url_for('static', filename='img/delete.png')}}" width = "15%" height = "auto" /></a>
+                    {% if post.completed == 'False' %}
+                        <a href="/checktask/{{ post.id }}"><img src="{{ url_for('static', filename='img/check.png')}}"width = "15%" height = "auto" /></a>
+                    {% else %}
+                        <a href="/unchecktask/{{ post.id }}"><img src="{{ url_for('static', filename='img/check.png')}}" width = "15%" height = "auto" /></a>
+                    {% endif %}
+                    <a href="/edit/{{ post.id }}"><img src="{{ url_for('static', filename='img/Edit.png')}}" width = "15%" height = "auto" /></a>
+                    <a href="/taskinfo/{{ post.id }}"><img src="{{ url_for('static', filename='img/View.png')}}" width = "15%" height = "auto" /></a>
+                    <a href="/AssignTask/{{ post.id }}"><img src="{{ url_for('static', filename='img/Assign.png')}}" width = "15%" height = "auto" /></a>
+                </td> 
             </tr>  
             {% endfor %}
-          
-        </table>
-        <th></th>
+        
+        </table>  
     </div>    
     </body>
 </html>

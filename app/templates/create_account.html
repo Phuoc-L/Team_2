@@ -1,9 +1,27 @@
-{% extends "base.html" %}
-
-{% block content %}
-    <h1>Create Account</h1>
-    <p> <a href='/login'>Login</a> <br> </p>
-    <form action="" method="post" novalidate>
+<!doctype html>
+<html lang="en" style="height:100%; width:100%;">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
+    </head>
+    <header>
+        
+    </header>
+    <body>
+    <div class="div1"> 
+    <section class="container-fluid bg">
+    <section class="row justify-content-center">
+    <section class="col-12 col-sm-6 col-md-3">
+    <img src="{{ url_for('static', filename='img/logo.png')}}" alt="logo" class="loginlogo">
+    <form action="" method="post" class= "form-container" novalidate>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
@@ -13,6 +31,18 @@
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>
+            <a href='/login'> Back</a> 
+            {{ form.submit() }}</p>
     </form>
-{% endblock %}
+        </p>
+        </section>
+        </section>
+        </section>
+    </div>
+    </body>
+</html> 
+
+
+
+
